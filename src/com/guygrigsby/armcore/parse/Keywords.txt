@@ -1,0 +1,16 @@
+AREA 2
+CODE 3
+READONLY 4
+ENTRY 5
+MOV 6
+ADD 7
+LDR 8
+SVC 9
+SWI 10
+END 11
+
+* after this is ignored
+reserved tokens
+User words 12
+number 13
+register 14
