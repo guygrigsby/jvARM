@@ -1,4 +1,4 @@
-package com.guygrigsby.armcore.parse;
+package com.guygrigsby.jvarm.core.parse;
 
 public class Token {
 	public Object token;

@@ -1,4 +1,4 @@
-package com.guygrigsby.armcore.parse;
+package com.guygrigsby.jvarm.core.parse;
 
 import java.io.IOException;
 import java.io.InputStream;

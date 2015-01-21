@@ -1,4 +1,4 @@
-package com.guygrigsby.armcore.test;
+package com.guygrigsby.jvarm.core.test;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,8 +9,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.guygrigsby.armcore.parse.ArmSourceTokenizer;
-import com.guygrigsby.armcore.parse.Token;
+import com.guygrigsby.jvarm.core.parse.ArmSourceTokenizer;
+import com.guygrigsby.jvarm.core.parse.Token;
 
 public class ArmSourceTokenizerTest {
 	
