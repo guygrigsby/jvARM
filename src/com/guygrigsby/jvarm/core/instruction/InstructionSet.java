@@ -1,4 +1,4 @@
-package com.guygrigsby.jvarm.core;
+package com.guygrigsby.jvarm.core.instruction;
 
 import java.util.HashSet;
 import java.util.Set;

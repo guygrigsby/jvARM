@@ -6,9 +6,14 @@ import java.io.InputStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.guygrigsby.jvarm.core.InstructionSet;
 import com.guygrigsby.jvarm.core.instruction.Instruction;
-
+import com.guygrigsby.jvarm.core.instruction.InstructionSet;
+/**
+ * This class taken an input stream for a ARM source code and parses it
+ * into {@code Instruction}s
+ * @author guy
+ *
+ */
 public class ArmSourceScanner {
 	
 	private static int EOF = 0;
@@ -37,7 +42,7 @@ public class ArmSourceScanner {
 	public Instruction nextInstruction() {
 		Instruction instruction = null;
 		switch (current.type) {
-		
+			//TODO this is where I need to do actual work.
 		}
 		return instruction;
 	}
