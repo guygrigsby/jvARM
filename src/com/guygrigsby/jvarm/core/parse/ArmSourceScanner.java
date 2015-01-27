@@ -6,8 +6,8 @@ import java.io.InputStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.guygrigsby.jvarm.core.Instruction;
 import com.guygrigsby.jvarm.core.InstructionSet;
+import com.guygrigsby.jvarm.core.instruction.Instruction;
 
 public class ArmSourceScanner {
 	
@@ -29,7 +29,11 @@ public class ArmSourceScanner {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Returns the next instruction in the source and advances the scanner.
+	 * There is no going back.
+	 * @return the next instruction
+	 */
 	public Instruction nextInstruction() {
 		Instruction instruction = null;
 		switch (current.type) {
@@ -37,8 +41,6 @@ public class ArmSourceScanner {
 		}
 		return instruction;
 	}
-	
-
 	private boolean isAddOrSubInstruction(Token token) {
 		int type = InstructionSet.getInstance().getInstructionType(token);
 		return type == InstructionSet.ADD || type == InstructionSet.SUBTRACT;
