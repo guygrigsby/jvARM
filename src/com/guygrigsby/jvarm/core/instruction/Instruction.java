@@ -1,7 +1,13 @@
 package com.guygrigsby.jvarm.core.instruction;
 
-import com.guygrigsby.jvarm.core.Node;
-
-public class Instruction extends Node {
-
+public abstract class Instruction {
+	private Instruction next;
+	
+	public void setNext(Instruction nextNode) {
+		next = nextNode;
+	}
+	
+	public Instruction getNext() {
+		return next;
+	}
 }

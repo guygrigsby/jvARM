@@ -19,7 +19,7 @@ public class ArmSourceCompiler {
 	 * @return the root node of the program (aka the first instruction)
 	 * @throws IOException
 	 */
-	public Node compile(InputStream source) {
+	public ArmProgram compile(InputStream source) {
 
 		return null;
 	}
