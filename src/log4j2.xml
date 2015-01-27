@@ -6,7 +6,7 @@
 		</Console>
 	</Appenders>
 	<Loggers>
-		<Logger name="com.guygrigsby.armcore" level="TRACE"/>
+		<Logger name="com.guygrigsby.jvarm" level="TRACE"/>
 		<Root level="WARN">
 			<AppenderRef ref="Console" />
 		</Root>

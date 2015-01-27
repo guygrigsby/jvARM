@@ -1,8 +1,10 @@
 package com.guygrigsby.jvarm.core.parse;
 
 public class Token {
+	
 	public Object token;
 	public int number;
+	public int type;
 	
 	public Token(Object tokenIn, int numberIn) {
 		token = tokenIn;

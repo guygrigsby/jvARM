@@ -68,11 +68,12 @@ public class ArmSourceTokenizer {
 				}
 			} else {
 				tokenValue = delegate.nval;
+				tokenType = 13;
 			}
 			break;
 
 		case StreamTokenizer.TT_WORD:
-			String word = delegate.sval;
+			String word = delegate.sval.toUpperCase();
 			if ((word.length() ==2 || word.length() == 3) && word.startsWith("r")) { //TODO this is ugly
 				tokenType = 14;
 			} else {
@@ -114,5 +115,4 @@ public class ArmSourceTokenizer {
 
 		return new Token(tokenValue, tokenType);
 	}
-
 }
