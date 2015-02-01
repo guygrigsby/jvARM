@@ -3,15 +3,14 @@ package com.guygrigsby.jvarm.core.parse;
 public class Token {
 	
 	public Object token;
-	public int number;
 	public int type;
 	
-	public Token(Object tokenIn, int numberIn) {
+	public Token(Object tokenIn, int typeIn) {
 		token = tokenIn;
-		number = numberIn;
+		type = typeIn;
 	}
 	
 	public String toString() {
-		return String.format("[%s %s]", token, number);
+		return String.format("[%s %s]", token, type);
 	}
 }

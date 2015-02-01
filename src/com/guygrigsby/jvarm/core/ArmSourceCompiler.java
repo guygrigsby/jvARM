@@ -6,6 +6,9 @@ import java.io.InputStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.guygrigsby.jvarm.core.instruction.Instruction;
+import com.guygrigsby.jvarm.core.parse.ArmSourceScanner;
+
 public class ArmSourceCompiler {
 	
 	private static final Logger logger = LogManager.getLogger();
@@ -20,7 +23,17 @@ public class ArmSourceCompiler {
 	 * @throws IOException
 	 */
 	public ArmProgram compile(InputStream source) {
-
-		return null;
+		Instruction prev = null;
+		Instruction next = null;
+		ArmSourceScanner scanner = new ArmSourceScanner(source);
+		next = scanner.nextInstruction();
+		ArmProgram program = new ArmProgram(next);
+		do {
+			prev = next;
+			next = scanner.nextInstruction();
+			prev.setNext(next);
+		} while (next != null);
+		
+		return program;
 	}
 }

@@ -15,10 +15,14 @@ public class ArmSourceTokenizer {
 
 	private static final Logger logger = LogManager
 			.getLogger(ArmSourceTokenizer.class);
-
-	private static final Integer DEFAULT_TOKEN_NUMBER = 12;
 	
-	private Map<String, Integer> keywords; 
+	public static final int ADD = 1;
+	public static final int FLEXIBLE_SECOND_OPERAND = 2;
+	
+	public static final int DEFAULT_TOKEN_NUMBER = 12;
+	
+	
+	public Map<String, Integer> keywords; 
 
 	private StreamTokenizer delegate;
 
@@ -36,16 +40,8 @@ public class ArmSourceTokenizer {
 
 	private Map<String, Integer> buildKeywordMap() {
 		keywords = new HashMap<String, Integer>();
-		InputStream is = ArmSourceTokenizer.class.getResourceAsStream("Keywords.txt");
-		Scanner in = new Scanner(is);
-		while (in.hasNext()) {
-			String next = in.next();
-			if (next.equals("*")) {
-				break;
-			}
-			keywords.put(next, in.nextInt());
-		}
-		in.close();
+		keywords.put("ADD", ADD);
+		//TODO add others
 		return keywords;
 	}
 	
@@ -112,7 +108,8 @@ public class ArmSourceTokenizer {
 
 			break;
 		}
-
-		return new Token(tokenValue, tokenType);
+		Token token = new Token(tokenValue, tokenType); 
+		logger.trace(token);
+		return token;
 	}
 }

@@ -6,6 +6,7 @@ import java.io.InputStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.guygrigsby.jvarm.core.instruction.AddInstruction;
 import com.guygrigsby.jvarm.core.instruction.Instruction;
 import com.guygrigsby.jvarm.core.instruction.InstructionSet;
 /**
@@ -37,12 +38,27 @@ public class ArmSourceScanner {
 	/**
 	 * Returns the next instruction in the source and advances the scanner.
 	 * There is no going back.
-	 * @return the next instruction
+	 * @return the next instruction or null if there are none.
 	 */
 	public Instruction nextInstruction() {
 		Instruction instruction = null;
 		switch (current.type) {
-			//TODO this is where I need to do actual work.
+		case ArmSourceTokenizer.ADD :
+			instruction = new AddInstruction();
+		}
+		if (instruction != null) {
+			try {
+				instruction.parse(tokenizer);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		try {
+			current = tokenizer.nextToken();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return instruction;
 	}

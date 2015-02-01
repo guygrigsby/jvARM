@@ -9,6 +9,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.guygrigsby.jvarm.core.ArmProgram;
+import com.guygrigsby.jvarm.core.ArmSourceCompiler;
 import com.guygrigsby.jvarm.core.parse.ArmSourceTokenizer;
 import com.guygrigsby.jvarm.core.parse.Token;
 
@@ -31,15 +33,9 @@ public class ArmSourceTokenizerTest {
 	@Test
 	public void test() throws IOException {
 		
-		InputStream is = ArmSourceTokenizerTest.class.getResourceAsStream("simple.s");
-		tokenizer = new ArmSourceTokenizer(is);
-		
-		Token next = tokenizer.nextToken();
-		
-		while (next.number != 0) {
-			logger.trace(next);
-			next = tokenizer.nextToken();
-		}
+		InputStream is = ArmSourceTokenizerTest.class.getResourceAsStream("add.s");
+		ArmProgram program = new ArmSourceCompiler().compile(is);
+
 
 	}
 
