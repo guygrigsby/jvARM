@@ -1,5 +1,7 @@
 package com.guygrigsby.jvarm.core;
 
+import java.util.Map;
+
 import com.guygrigsby.jvarm.core.instruction.Instruction;
 
 public class ArmProgram {
@@ -13,14 +15,14 @@ public class ArmProgram {
 		current = root;
 	}
 	
-	public void run(ARMProcessor cpu, Memory memory) {
-		while (current.getNext() != null) {
-			step(cpu, memory);
+	public void run(Map<String, Integer> registers) {
+		while (current != null) {
+			step(registers);
 		}
 	}
 	
-	public void step(ARMProcessor cpu, Memory memory) {
-		
+	public void step(Map<String, Integer> registers) {
+		current.execute(registers);
 		current = current.getNext();
 	}
 

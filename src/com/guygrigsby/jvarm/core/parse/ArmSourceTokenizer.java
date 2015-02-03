@@ -16,10 +16,14 @@ public class ArmSourceTokenizer {
 	private static final Logger logger = LogManager
 			.getLogger(ArmSourceTokenizer.class);
 	
+	
 	public static final int ADD = 1;
 	public static final int FLEXIBLE_SECOND_OPERAND = 2;
+	public static final int REGISTER = 3;
 	
 	public static final int DEFAULT_TOKEN_NUMBER = 12;
+	
+	public static final int CONSTANT = 13;
 	
 	
 	public Map<String, Integer> keywords; 
@@ -47,31 +51,33 @@ public class ArmSourceTokenizer {
 	
 	public Token nextToken() throws IOException {
 		int next = delegate.nextToken();
-		Object tokenValue = null;
+		String tokenValue = null;
 		int tokenType = DEFAULT_TOKEN_NUMBER;
+		int tokenIntValue = 0;
 		switch (next) {
 
 		case StreamTokenizer.TT_NUMBER:
-			double num = delegate.nval;
+			int num = (int) delegate.nval;
 			if (num == 0) { //hex TODO this should be done by finding a #
 				next = delegate.nextToken();
 				String possibleHex = delegate.sval;
 				if (possibleHex.startsWith("x")) {
-					tokenValue = Integer.parseInt(possibleHex.substring(1), 16);
+					tokenValue = possibleHex.substring(1);
 					tokenType = 13;
 				} else {
 					delegate.pushBack();
 				}
 			} else {
-				tokenValue = delegate.nval;
+				tokenValue = num+""; //TODO this is a hack
+				tokenIntValue = num;
 				tokenType = 13;
 			}
 			break;
 
 		case StreamTokenizer.TT_WORD:
 			String word = delegate.sval.toUpperCase();
-			if ((word.length() ==2 || word.length() == 3) && word.startsWith("r")) { //TODO this is ugly
-				tokenType = 14;
+			if ((word.length() ==2 || word.length() == 3) && word.startsWith("R")) { //TODO this is ugly
+				tokenType = REGISTER;
 			} else {
 				tokenType = keywords.get(word) == null ? DEFAULT_TOKEN_NUMBER : keywords.get(word);
 			}
@@ -103,12 +109,12 @@ public class ArmSourceTokenizer {
 				
 				//break;
 			default:
-				tokenValue = c;
+				tokenValue = Character.toString(c);
 			}
 
 			break;
 		}
-		Token token = new Token(tokenValue, tokenType); 
+		Token token = new Token(tokenValue, tokenIntValue, tokenType); 
 		logger.trace(token);
 		return token;
 	}

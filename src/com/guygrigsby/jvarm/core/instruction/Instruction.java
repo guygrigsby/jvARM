@@ -16,7 +16,7 @@ public abstract class Instruction {
 		return next;
 	}
 	
-	public abstract void execute(Map<String, Integer> registers);
+	public abstract int execute(Map<String, Integer> registers);
 	
 	public abstract void parse(ArmSourceTokenizer tokenizer) throws IOException;
 }

@@ -38,7 +38,7 @@ public class InstructionSet {
 	}
 	
 	public int getInstructionType(Token token) {
-		Object possibleInstruction = token.token;
+		Object possibleInstruction = token.value;
 		int type = UNKNOWN;
 		if (addInstructions.contains(possibleInstruction)) {
 			type = ADD;

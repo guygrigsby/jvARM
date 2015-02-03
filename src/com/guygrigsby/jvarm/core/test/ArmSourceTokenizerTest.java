@@ -2,6 +2,8 @@ package com.guygrigsby.jvarm.core.test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,7 +14,6 @@ import org.junit.Test;
 import com.guygrigsby.jvarm.core.ArmProgram;
 import com.guygrigsby.jvarm.core.ArmSourceCompiler;
 import com.guygrigsby.jvarm.core.parse.ArmSourceTokenizer;
-import com.guygrigsby.jvarm.core.parse.Token;
 
 public class ArmSourceTokenizerTest {
 	
@@ -35,7 +36,15 @@ public class ArmSourceTokenizerTest {
 		
 		InputStream is = ArmSourceTokenizerTest.class.getResourceAsStream("add.s");
 		ArmProgram program = new ArmSourceCompiler().compile(is);
-
+		Map<String, Integer> registers = new HashMap<String, Integer>();
+		registers.put("R0", 1);
+		registers.put("R1", 2);
+		program.run(registers);;
+		//dump registers
+		logger.trace("Registers:");
+		for (String key : registers.keySet()) {
+			logger.trace("{} : {}", key, registers.get(key));
+		}
 
 	}
 

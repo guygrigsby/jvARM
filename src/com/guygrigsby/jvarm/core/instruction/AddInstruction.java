@@ -8,20 +8,26 @@ import com.guygrigsby.jvarm.core.parse.Token;
 
 public class AddInstruction extends Instruction {
 	
+	private String destRegister;
+	private String firstOperand;
+	
 	private Instruction flexibleSecondOp;
 
 	@Override
-	public void execute(Map<String, Integer> registers) {
-		// TODO Auto-generated method stub
+	public int execute(Map<String, Integer> registers) {
+		int first = registers.get(firstOperand);
+		int result = first + flexibleSecondOp.execute(registers);
+		registers.put(destRegister, result);
+		return result;
+		
 
 	}
 
 	@Override
 	public void parse(ArmSourceTokenizer tokenizer) throws IOException {
-		Token add = tokenizer.nextToken();
-		Token firstRegister = tokenizer.nextToken();
+		destRegister = (String) tokenizer.nextToken().value;
 		Token firstComma = tokenizer.nextToken();
-		Token secondRegister = tokenizer.nextToken();
+		firstOperand = (String) tokenizer.nextToken().value;
 		Token secondComma = tokenizer.nextToken();
 		flexibleSecondOp = new FlexibleSecondOperand();
 		flexibleSecondOp.parse(tokenizer);

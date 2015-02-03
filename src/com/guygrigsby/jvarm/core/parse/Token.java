@@ -2,15 +2,23 @@ package com.guygrigsby.jvarm.core.parse;
 
 public class Token {
 	
-	public Object token;
+	public String value;
 	public int type;
+	/**
+	 * Only non-zero if the type is {@code ArmSourceTokenizer.CONSTANT}
+	 */
+	public int intValue;
 	
-	public Token(Object tokenIn, int typeIn) {
-		token = tokenIn;
+	public Token(String valueIn, int typeIn) {
+		this(valueIn, 0, typeIn);
+	}
+	public Token(String valueIn, int intValueIn, int typeIn) {
+		value = valueIn;
 		type = typeIn;
+		intValue = intValueIn;
 	}
 	
 	public String toString() {
-		return String.format("[%s %s]", token, type);
+		return String.format("[%s %s]", value, type);
 	}
 }
