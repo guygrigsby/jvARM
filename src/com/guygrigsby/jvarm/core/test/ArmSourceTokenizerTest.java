@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import com.guygrigsby.jvarm.core.ArmProgram;
 import com.guygrigsby.jvarm.core.ArmSourceCompiler;
+import com.guygrigsby.jvarm.core.Memory;
 import com.guygrigsby.jvarm.core.parse.ArmSourceTokenizer;
 
 public class ArmSourceTokenizerTest {
@@ -39,7 +40,8 @@ public class ArmSourceTokenizerTest {
 		Map<String, Integer> registers = new HashMap<String, Integer>();
 		registers.put("R0", 1);
 		registers.put("R1", 2);
-		program.run(registers);;
+		Memory memory = new Memory();
+		program.run(registers, memory);
 		//dump registers
 		logger.trace("Registers:");
 		for (String key : registers.keySet()) {

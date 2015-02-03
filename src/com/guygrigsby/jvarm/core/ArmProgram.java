@@ -15,7 +15,7 @@ public class ArmProgram {
 		current = root;
 	}
 	
-	public void run(Map<String, Integer> registers) {
+	public void run(Map<String, Integer> registers, Memory memory) {
 		while (current != null) {
 			step(registers);
 		}

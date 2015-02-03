@@ -38,7 +38,7 @@ public class ArmSourceScanner {
 	/**
 	 * Returns the next instruction in the source and advances the scanner.
 	 * There is no going back.
-	 * @return the next instruction or null if there are none.
+	 * @return the next instruction or null if there is none.
 	 */
 	public Instruction nextInstruction() {
 		Instruction instruction = null;
@@ -62,10 +62,4 @@ public class ArmSourceScanner {
 		}
 		return instruction;
 	}
-	private boolean isAddOrSubInstruction(Token token) {
-		int type = InstructionSet.getInstance().getInstructionType(token);
-		return type == InstructionSet.ADD || type == InstructionSet.SUBTRACT;
-		
-	}
-
 }
