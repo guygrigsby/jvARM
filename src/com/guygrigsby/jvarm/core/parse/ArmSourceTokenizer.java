@@ -13,8 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 public class ArmSourceTokenizer {
 
-	private static final Logger logger = LogManager
-			.getLogger(ArmSourceTokenizer.class);
+	private static final Logger logger = LogManager.getLogger();
 	
 	
 	public static final int ADD = 1;
@@ -33,7 +32,7 @@ public class ArmSourceTokenizer {
 	public ArmSourceTokenizer(InputStream inputIn) {
 		keywords = buildKeywordMap();
 		InputStreamReader reader = new InputStreamReader(inputIn);
-		logger.trace("Encoding " + reader.getEncoding());
+		logger.trace("Encoding {}", reader.getEncoding());
 		delegate = new StreamTokenizer(reader);
 		delegate.commentChar('*');
 		delegate.commentChar(';');
