@@ -23,6 +23,11 @@ public class ArmSourceTokenizer {
 	public static final int DEFAULT_TOKEN_NUMBER = 12;
 	
 	public static final int CONSTANT = 13;
+
+	/**
+	 * Represents the # that precedes a constant
+	 */
+	public static final int CONSTANT_MARKER = 14;
 	
 	
 	public Map<String, Integer> keywords; 
@@ -91,7 +96,6 @@ public class ArmSourceTokenizer {
 		case '\'':
 			tokenValue = delegate.sval;
 			break;
-
 		case StreamTokenizer.TT_EOL:
 			tokenValue = "eol";
 			tokenType = 1;
@@ -105,8 +109,7 @@ public class ArmSourceTokenizer {
 			switch (c) {
 			
 			case '#':
-				
-				//break;
+				tokenType = CONSTANT_MARKER;
 			default:
 				tokenValue = Character.toString(c);
 			}

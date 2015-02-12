@@ -22,5 +22,9 @@ public class RegisterContents extends Instruction {
 	public void parse(ArmSourceTokenizer tokenizer) throws IOException {
 		return;
 	}
+	
+	public String getRegisterName() {
+		return register;
+	}
 
 }
