@@ -16,9 +16,11 @@ public class ArmSourceTokenizer {
 	private static final Logger logger = LogManager.getLogger();
 	
 	
-	public static final int ADD = 1;
-	public static final int FLEXIBLE_SECOND_OPERAND = 2;
-	public static final int REGISTER = 3;
+	public static final int REGISTER 				= 2;
+	public static final int FLEXIBLE_SECOND_OPERAND = 3;
+	public static final int ADD 					= 4;
+	public static final int SUB 					= 5;
+	public static final int RSB 					= 6;
 	
 	public static final int DEFAULT_TOKEN_NUMBER = 12;
 	
@@ -28,6 +30,11 @@ public class ArmSourceTokenizer {
 	 * Represents the # that precedes a constant
 	 */
 	public static final int CONSTANT_MARKER = 14;
+
+
+
+
+
 	
 	
 	public Map<String, Integer> keywords; 
@@ -49,6 +56,9 @@ public class ArmSourceTokenizer {
 	private Map<String, Integer> buildKeywordMap() {
 		keywords = new HashMap<String, Integer>();
 		keywords.put("ADD", ADD);
+		keywords.put("SUB", SUB);
+		keywords.put("RSB", RSB);
+		
 		//TODO add others
 		return keywords;
 	}

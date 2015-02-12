@@ -8,7 +8,8 @@ import org.apache.logging.log4j.Logger;
 
 import com.guygrigsby.jvarm.core.instruction.AddInstruction;
 import com.guygrigsby.jvarm.core.instruction.Instruction;
-import com.guygrigsby.jvarm.core.instruction.InstructionSet;
+import com.guygrigsby.jvarm.core.instruction.RSBInstruction;
+import com.guygrigsby.jvarm.core.instruction.SubInstruction;
 /**
  * This class taken an input stream for a ARM source code and parses it
  * into {@code Instruction}s
@@ -43,8 +44,15 @@ public class ArmSourceScanner {
 	public Instruction nextInstruction() {
 		Instruction instruction = null;
 		switch (current.type) {
-		case ArmSourceTokenizer.ADD :
+		case ArmSourceTokenizer.ADD:
 			instruction = new AddInstruction();
+			break;
+		case ArmSourceTokenizer.SUB:
+			instruction = new SubInstruction();
+			break;
+		case ArmSourceTokenizer.RSB:
+			instruction = new RSBInstruction();
+			break;
 		}
 		if (instruction != null) {
 			try {
