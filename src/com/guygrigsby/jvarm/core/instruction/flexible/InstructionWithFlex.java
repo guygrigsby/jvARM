@@ -1,19 +1,18 @@
-package com.guygrigsby.jvarm.core.instruction;
+package com.guygrigsby.jvarm.core.instruction.flexible;
 
 import java.io.IOException;
-import java.util.Map;
 
-import com.guygrigsby.jvarm.core.instruction.flexible.FlexibleSecondOperand;
+import com.guygrigsby.jvarm.core.instruction.Instruction;
 import com.guygrigsby.jvarm.core.parse.ArmSourceTokenizer;
 import com.guygrigsby.jvarm.core.parse.Token;
 
-public abstract class ArithmeticInstruction extends Instruction {
+public abstract class InstructionWithFlex extends Instruction {
 	
 	private String destRegister;
 	private String firstOperand;
 	private Instruction flexibleSecondOp;
 
-	public ArithmeticInstruction() {
+	public InstructionWithFlex() {
 		super();
 	}
 

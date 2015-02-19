@@ -1,16 +1,16 @@
-package com.guygrigsby.jvarm.core.instruction;
+package com.guygrigsby.jvarm.core.instruction.logical;
 
-import java.io.IOException;
 import java.util.Map;
 
-public class SubInstruction extends ArithmeticInstruction {
+public class OR extends LogicalInstruction {
 
 	@Override
 	public int execute(Map<String, Integer> registers) {
 		int first = registers.get(getFirstOperand());
 		int second = getFlexibleSecondOp().execute(registers);;
-		int result = first - second;
+		int result = first | second;
 		registers.put(getDestRegister(), result);
 		return result;
 	}
+
 }

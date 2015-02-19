@@ -21,6 +21,9 @@ public class ArmSourceTokenizer {
 	public static final int ADD 					= 4;
 	public static final int SUB 					= 5;
 	public static final int RSB 					= 6;
+	public static final int AND						= 7;
+	public static final int OR						= 8;
+	public static final int EOR						= 9;
 	
 	public static final int DEFAULT_TOKEN_NUMBER = 12;
 	
@@ -58,6 +61,9 @@ public class ArmSourceTokenizer {
 		keywords.put("ADD", ADD);
 		keywords.put("SUB", SUB);
 		keywords.put("RSB", RSB);
+		keywords.put("AND", AND);
+		keywords.put("OR", OR);
+		keywords.put("EOR", EOR);
 		
 		//TODO add others
 		return keywords;

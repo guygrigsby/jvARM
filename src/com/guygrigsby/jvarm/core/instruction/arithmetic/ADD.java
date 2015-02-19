@@ -1,8 +1,8 @@
-package com.guygrigsby.jvarm.core.instruction;
+package com.guygrigsby.jvarm.core.instruction.arithmetic;
 
 import java.util.Map;
 
-public class AddInstruction extends ArithmeticInstruction {
+public class ADD extends ArithmeticInstruction {
 
 	@Override
 	public int execute(Map<String, Integer> registers) {

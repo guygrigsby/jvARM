@@ -6,10 +6,13 @@ import java.io.InputStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.guygrigsby.jvarm.core.instruction.AddInstruction;
 import com.guygrigsby.jvarm.core.instruction.Instruction;
-import com.guygrigsby.jvarm.core.instruction.RSBInstruction;
-import com.guygrigsby.jvarm.core.instruction.SubInstruction;
+import com.guygrigsby.jvarm.core.instruction.arithmetic.ADD;
+import com.guygrigsby.jvarm.core.instruction.arithmetic.RSB;
+import com.guygrigsby.jvarm.core.instruction.arithmetic.SUB;
+import com.guygrigsby.jvarm.core.instruction.logical.AND;
+import com.guygrigsby.jvarm.core.instruction.logical.EOR;
+import com.guygrigsby.jvarm.core.instruction.logical.OR;
 /**
  * This class taken an input stream for a ARM source code and parses it
  * into {@code Instruction}s
@@ -45,13 +48,22 @@ public class ArmSourceScanner {
 		Instruction instruction = null;
 		switch (current.type) {
 		case ArmSourceTokenizer.ADD:
-			instruction = new AddInstruction();
+			instruction = new ADD();
 			break;
 		case ArmSourceTokenizer.SUB:
-			instruction = new SubInstruction();
+			instruction = new SUB();
 			break;
 		case ArmSourceTokenizer.RSB:
-			instruction = new RSBInstruction();
+			instruction = new RSB();
+			break;
+		case ArmSourceTokenizer.AND:
+			instruction = new AND();
+			break;
+		case ArmSourceTokenizer.OR:
+			instruction = new OR();
+			break;
+		case ArmSourceTokenizer.EOR:
+			instruction = new EOR();
 			break;
 		}
 		if (instruction != null) {

@@ -16,9 +16,9 @@ import com.guygrigsby.jvarm.core.ArmSourceCompiler;
 import com.guygrigsby.jvarm.core.Memory;
 import com.guygrigsby.jvarm.core.parse.ArmSourceTokenizer;
 
-public class ArmSourceTokenizerTest {
+public class ArmTest {
 	
-	private static final Logger logger = LogManager.getLogger(ArmSourceTokenizerTest.class);
+	private static final Logger logger = LogManager.getLogger(ArmTest.class);
 
 	
 	ArmSourceTokenizer tokenizer;
@@ -35,7 +35,7 @@ public class ArmSourceTokenizerTest {
 	@Test
 	public void test() throws IOException {
 		
-		InputStream is = ArmSourceTokenizerTest.class.getResourceAsStream("add.s");
+		InputStream is = ArmTest.class.getResourceAsStream("add.s");
 		ArmProgram program = new ArmSourceCompiler().compile(is);
 		Map<String, Integer> registers = new HashMap<String, Integer>();
 		registers.put("R0", 1);

@@ -1,14 +1,14 @@
-package com.guygrigsby.jvarm.core.instruction;
+package com.guygrigsby.jvarm.core.instruction.logical;
 
 import java.util.Map;
 
-public class RSBInstruction extends ArithmeticInstruction {
+public class AND extends LogicalInstruction {
 
 	@Override
 	public int execute(Map<String, Integer> registers) {
 		int first = registers.get(getFirstOperand());
 		int second = getFlexibleSecondOp().execute(registers);;
-		int result = second - first;
+		int result = first & second;
 		registers.put(getDestRegister(), result);
 		return result;
 	}
