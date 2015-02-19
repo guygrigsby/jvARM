@@ -21,7 +21,7 @@ public class FlexibleSecondOperand extends Instruction {
 	}
 
 	@Override
-	public void parse(ArmSourceTokenizer tokenizer) throws IOException {
+	public void parse(ArmSourceTokenizer tokenizer) throws IOException, JvarmCompilerException {
 		Token token = tokenizer.nextToken();
 
 		int tokenType = token.type;

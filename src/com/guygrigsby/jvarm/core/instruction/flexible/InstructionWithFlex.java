@@ -17,7 +17,7 @@ public abstract class InstructionWithFlex extends Instruction {
 	}
 
 	@Override
-	public final void parse(ArmSourceTokenizer tokenizer) throws IOException {
+	public final void parse(ArmSourceTokenizer tokenizer) throws IOException, JvarmCompilerException {
 		destRegister = (String) tokenizer.nextToken().value;
 		Token firstComma = tokenizer.nextToken();
 		firstOperand = (String) tokenizer.nextToken().value;

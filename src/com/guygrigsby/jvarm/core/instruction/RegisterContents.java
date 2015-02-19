@@ -1,8 +1,10 @@
 package com.guygrigsby.jvarm.core.instruction;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
+import com.guygrigsby.jvarm.core.instruction.flexible.JvarmCompilerException;
 import com.guygrigsby.jvarm.core.parse.ArmSourceTokenizer;
 
 public class RegisterContents extends Instruction {
@@ -19,7 +21,7 @@ public class RegisterContents extends Instruction {
 	}
 
 	@Override
-	public void parse(ArmSourceTokenizer tokenizer) throws IOException {
+	public void parse(ArmSourceTokenizer tokenizer) throws IOException, JvarmCompilerException {
 		return;
 	}
 	

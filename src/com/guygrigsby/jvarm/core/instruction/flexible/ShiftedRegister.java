@@ -47,7 +47,7 @@ public class ShiftedRegister extends RegisterContents {
 	}
 
 	@Override
-	public void parse(ArmSourceTokenizer tokenizer) throws IOException {
+	public void parse(ArmSourceTokenizer tokenizer) throws IOException, JvarmCompilerException {
 		Token shift = tokenizer.nextToken();
 		shiftType = shift.value;
 		Token shiftBy = tokenizer.nextToken();;
@@ -57,7 +57,7 @@ public class ShiftedRegister extends RegisterContents {
 		} else if (shiftByType == ArmSourceTokenizer.REGISTER) {
 			shiftByInstruction = new RegisterContents(shiftBy.value);
 		} else {
-			//TODO ERROR
+			throw new JvarmCompilerException("Must shift by Constant or register contents.");
 		}
 		shiftByInstruction.parse(tokenizer);
 		

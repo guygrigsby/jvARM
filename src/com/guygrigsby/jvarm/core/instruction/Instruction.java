@@ -3,6 +3,7 @@ package com.guygrigsby.jvarm.core.instruction;
 import java.io.IOException;
 import java.util.Map;
 
+import com.guygrigsby.jvarm.core.instruction.flexible.JvarmCompilerException;
 import com.guygrigsby.jvarm.core.parse.ArmSourceTokenizer;
 
 public abstract class Instruction {
@@ -18,5 +19,5 @@ public abstract class Instruction {
 	
 	public abstract int execute(Map<String, Integer> registers);
 	
-	public abstract void parse(ArmSourceTokenizer tokenizer) throws IOException;
+	public abstract void parse(ArmSourceTokenizer tokenizer) throws IOException, JvarmCompilerException;
 }
