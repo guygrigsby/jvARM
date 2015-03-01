@@ -19,19 +19,30 @@ public class ArmSourceCompiler {
 	/**
 	 * 
 	 * @param source
-	 * @return the root node of the program (aka the first instruction)
+	 * @return the root node of the program (aka the first instruction) or {@code null} id compiler errors
 	 * @throws IOException
 	 */
-	public ArmProgram compile(InputStream source) {
+	public ArmProgram compile(InputStream source, CompilerInfoCollector collector ) {
 		Instruction prev = null;
 		Instruction next = null;
 		ArmSourceScanner scanner = new ArmSourceScanner(source);
-		next = scanner.nextInstruction();
+		try {
+			next = scanner.nextInstruction();
+		} catch (CompilerError e) {
+			collector.addError(e);
+		}
 		ArmProgram program = new ArmProgram(next);
 		do {
 			prev = next;
-			next = scanner.nextInstruction();
-			prev.setNext(next);
+			try {
+				next = scanner.nextInstruction();
+			} catch (CompilerError e) {
+				next = null;
+				collector.addError(e);
+			}
+			if (prev != null) {
+				prev.setNext(next);
+			}
 		} while (next != null);
 		
 		return program;

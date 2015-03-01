@@ -3,6 +3,7 @@ package com.guygrigsby.jvarm.core.instruction.flexible;
 import java.io.IOException;
 import java.util.Map;
 
+import com.guygrigsby.jvarm.core.CompilerError;
 import com.guygrigsby.jvarm.core.instruction.Constant;
 import com.guygrigsby.jvarm.core.instruction.Instruction;
 import com.guygrigsby.jvarm.core.instruction.RegisterContents;
@@ -47,7 +48,7 @@ public class ShiftedRegister extends RegisterContents {
 	}
 
 	@Override
-	public void parse(ArmSourceTokenizer tokenizer) throws IOException, JvarmCompilerException {
+	public void parse(ArmSourceTokenizer tokenizer) throws IOException, CompilerError {
 		Token shift = tokenizer.nextToken();
 		shiftType = shift.value;
 		Token shiftBy = tokenizer.nextToken();;
@@ -57,7 +58,13 @@ public class ShiftedRegister extends RegisterContents {
 		} else if (shiftByType == ArmSourceTokenizer.REGISTER) {
 			shiftByInstruction = new RegisterContents(shiftBy.value);
 		} else {
-			throw new JvarmCompilerException("Must shift by Constant or register contents.");
+			int lineNo = tokenizer.getLineNumber();
+			String line = tokenizer.advanceToNextLine();
+			CompilerError error = new CompilerError(lineNo,
+					"Shifted Register must be shifted by valid constant or register contents",
+					line);
+			
+			throw error;
 		}
 		shiftByInstruction.parse(tokenizer);
 		

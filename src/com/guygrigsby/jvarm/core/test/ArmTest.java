@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import com.guygrigsby.jvarm.core.ArmProgram;
 import com.guygrigsby.jvarm.core.ArmSourceCompiler;
+import com.guygrigsby.jvarm.core.CompilerInfoCollector;
 import com.guygrigsby.jvarm.core.Memory;
 import com.guygrigsby.jvarm.core.parse.ArmSourceTokenizer;
 
@@ -36,7 +37,7 @@ public class ArmTest {
 	public void test() throws IOException {
 		
 		InputStream is = ArmTest.class.getResourceAsStream("add.s");
-		ArmProgram program = new ArmSourceCompiler().compile(is);
+		ArmProgram program = new ArmSourceCompiler().compile(is, new CompilerInfoCollector());
 		Map<String, Integer> registers = new HashMap<String, Integer>();
 		registers.put("R0", 1);
 		registers.put("R1", 2);

@@ -35,6 +35,9 @@ public class ArmSourceTokenizer {
 	public static final int CONSTANT_MARKER = 14;
 
 
+	public static final int EOF = 0;
+
+
 
 
 
@@ -118,7 +121,7 @@ public class ArmSourceTokenizer {
 			break;
 		case StreamTokenizer.TT_EOF:
 			tokenValue = "eof";
-			tokenType = 0;
+			tokenType = EOF;
 			break;
 		default:
 			char c = (char) delegate.ttype;
@@ -135,5 +138,30 @@ public class ArmSourceTokenizer {
 		Token token = new Token(tokenValue, tokenIntValue, tokenType); 
 		logger.trace(token);
 		return token;
+	}
+	
+	public String advanceToNextLine() {
+		StringBuilder sb = new StringBuilder();
+		try {
+			int next = delegate.ttype; 
+			while (next != StreamTokenizer.TT_EOL && next != StreamTokenizer.TT_EOF) {
+				if (delegate.sval != null) {
+					sb.append(delegate.sval);
+				} else {
+					sb.append((char)delegate.ttype);
+				}
+				
+				sb.append(" ");
+				next = delegate.nextToken(); 
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sb.toString();
+	}
+	
+	public int getLineNumber() {
+		return delegate.lineno();
 	}
 }

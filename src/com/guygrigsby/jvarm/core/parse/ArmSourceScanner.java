@@ -8,11 +8,11 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.guygrigsby.jvarm.core.CompilerError;
 import com.guygrigsby.jvarm.core.instruction.Instruction;
 import com.guygrigsby.jvarm.core.instruction.arithmetic.ADD;
 import com.guygrigsby.jvarm.core.instruction.arithmetic.RSB;
 import com.guygrigsby.jvarm.core.instruction.arithmetic.SUB;
-import com.guygrigsby.jvarm.core.instruction.flexible.JvarmCompilerException;
 import com.guygrigsby.jvarm.core.instruction.logical.AND;
 import com.guygrigsby.jvarm.core.instruction.logical.EOR;
 import com.guygrigsby.jvarm.core.instruction.logical.OR;
@@ -31,18 +31,12 @@ public class ArmSourceScanner {
 	private ArmSourceTokenizer tokenizer;
 
 	private Token current;
-	
-	private int currentLineNumber;
-
-	private List<JvarmCompilerException> compilerErrors;
 
 	
 	public ArmSourceScanner(InputStream source) {
-		compilerErrors = new ArrayList<JvarmCompilerException>();
 		tokenizer = new ArmSourceTokenizer(source);
 		try {
 			current = tokenizer.nextToken();
-			currentLineNumber = 0;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,9 +47,8 @@ public class ArmSourceScanner {
 	 * There is no going back.
 	 * @return the next instruction or null if there is none.
 	 */
-	public Instruction nextInstruction() {
+	public Instruction nextInstruction() throws CompilerError {
 		Instruction instruction = null;
-		currentLineNumber++;
 		switch (current.type) {
 		case ArmSourceTokenizer.ADD:
 			instruction = new ADD();
@@ -75,6 +68,19 @@ public class ArmSourceScanner {
 		case ArmSourceTokenizer.EOR:
 			instruction = new EOR();
 			break;
+		case ArmSourceTokenizer.EOF:
+			return null;
+		default:
+			int lineNo = tokenizer.getLineNumber();
+			String instructionName = current.value;
+			String badLine = tokenizer.advanceToNextLine();
+			try {
+				current = tokenizer.nextToken();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			throw new CompilerError(lineNo, "Unrecognized Instruction " + instructionName, badLine);
 		}
 		if (instruction != null) {
 			try {
@@ -82,10 +88,9 @@ public class ArmSourceScanner {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (JvarmCompilerException e) {
-				e.setLineNumber(currentLineNumber);
-				compilerErrors.add(e);
-				e.printStackTrace();
+			} catch (CompilerError e) {
+				//e.setLineNumber(tokenizer.getLineNumber());
+				throw e;
 			}
 		}
 		try {

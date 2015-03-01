@@ -1,10 +1,9 @@
 package com.guygrigsby.jvarm.core.instruction.flexible;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
+import com.guygrigsby.jvarm.core.CompilerError;
 import com.guygrigsby.jvarm.core.instruction.Constant;
 import com.guygrigsby.jvarm.core.instruction.Instruction;
 import com.guygrigsby.jvarm.core.instruction.RegisterContents;
@@ -21,7 +20,7 @@ public class FlexibleSecondOperand extends Instruction {
 	}
 
 	@Override
-	public void parse(ArmSourceTokenizer tokenizer) throws IOException, JvarmCompilerException {
+	public void parse(ArmSourceTokenizer tokenizer) throws IOException, CompilerError {
 		Token token = tokenizer.nextToken();
 
 		int tokenType = token.type;
@@ -42,8 +41,13 @@ public class FlexibleSecondOperand extends Instruction {
 			instruction = new Constant();
 			break;
 		default:
-
-			break;
+			int lineNo = tokenizer.getLineNumber();
+			String line = tokenizer.advanceToNextLine();
+			CompilerError error = new CompilerError(lineNo,
+					"Illegal Flexible Second Operand",
+					line);
+			
+			throw error;
 		}
 		
 		instruction.parse(tokenizer);
