@@ -1,9 +1,8 @@
 package com.guygrigsby.jvarm.core.instruction.flexible;
 
 import java.io.IOException;
-import java.util.Map;
-
 import com.guygrigsby.jvarm.core.CompilerError;
+import com.guygrigsby.jvarm.core.Registers;
 import com.guygrigsby.jvarm.core.instruction.Constant;
 import com.guygrigsby.jvarm.core.instruction.Instruction;
 import com.guygrigsby.jvarm.core.instruction.RegisterContents;
@@ -20,7 +19,7 @@ public class ShiftedRegister extends RegisterContents {
 	}
 
 	@Override
-	public int execute(Map<String, Integer> registers) {
+	public int execute(Registers registers) {
 		int valueToBeShifted = super.execute(registers);
 		int valueToShiftBy = shiftByInstruction.execute(registers);
 		int shiftedValue = 0;
@@ -35,10 +34,22 @@ public class ShiftedRegister extends RegisterContents {
 			shiftedValue = valueToBeShifted >>> valueToShiftBy;
 			break;
 		case "ROR":
-			Integer.rotateRight(valueToBeShifted, valueToShiftBy);
+			shiftedValue = Integer.rotateRight(valueToBeShifted, valueToShiftBy);
+			boolean carry = (shiftedValue & 0x80000000) == 0x80000000;
+			registers.setCarry(carry);
 			break;
 		case "RRX":
+			boolean currentCarry = registers.isCarry();
+			boolean newCarry = (valueToBeShifted & 0x1) == 0x1;
 			shiftedValue = valueToBeShifted >> 1;
+			if (currentCarry) {
+				shiftedValue = shiftedValue | 0x80000000;
+			} else {
+				shiftedValue = shiftedValue & 0x00000001;
+			}
+			registers.setCarry(newCarry);
+			break;
+		case "":
 			break;
 		default:
 			//TODO error

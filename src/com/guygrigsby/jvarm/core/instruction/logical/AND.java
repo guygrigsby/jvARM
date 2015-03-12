@@ -1,11 +1,11 @@
 package com.guygrigsby.jvarm.core.instruction.logical;
 
-import java.util.Map;
+import com.guygrigsby.jvarm.core.Registers;
 
 public class AND extends LogicalInstruction {
 
 	@Override
-	public int execute(Map<String, Integer> registers) {
+	public int execute(Registers registers) {
 		int first = registers.get(getFirstOperand());
 		int second = getFlexibleSecondOp().execute(registers);;
 		int result = first & second;

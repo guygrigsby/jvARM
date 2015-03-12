@@ -1,9 +1,8 @@
 package com.guygrigsby.jvarm.core.instruction.flexible;
 
 import java.io.IOException;
-import java.util.Map;
-
 import com.guygrigsby.jvarm.core.CompilerError;
+import com.guygrigsby.jvarm.core.Registers;
 import com.guygrigsby.jvarm.core.instruction.Constant;
 import com.guygrigsby.jvarm.core.instruction.Instruction;
 import com.guygrigsby.jvarm.core.instruction.RegisterContents;
@@ -15,7 +14,7 @@ public class FlexibleSecondOperand extends Instruction {
 	Instruction instruction;
 
 	@Override
-	public int execute(Map<String, Integer> registers) {
+	public int execute(Registers registers) {
 		return instruction.execute(registers);
 	}
 

@@ -1,9 +1,9 @@
 package com.guygrigsby.jvarm.core.instruction;
 
 import java.io.IOException;
-import java.util.Map;
 
 import com.guygrigsby.jvarm.core.CompilerError;
+import com.guygrigsby.jvarm.core.Registers;
 import com.guygrigsby.jvarm.core.parse.ArmSourceTokenizer;
 
 public class RegisterContents extends Instruction {
@@ -15,7 +15,7 @@ public class RegisterContents extends Instruction {
 	}
 
 	@Override
-	public int execute(Map<String, Integer> registers) {
+	public int execute(Registers registers) {
 		return registers.get(register);
 	}
 

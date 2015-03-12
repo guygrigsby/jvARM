@@ -2,8 +2,6 @@ package com.guygrigsby.jvarm.core.test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +13,7 @@ import com.guygrigsby.jvarm.core.ArmProgram;
 import com.guygrigsby.jvarm.core.ArmSourceCompiler;
 import com.guygrigsby.jvarm.core.CompilerInfoCollector;
 import com.guygrigsby.jvarm.core.Memory;
+import com.guygrigsby.jvarm.core.Registers;
 import com.guygrigsby.jvarm.core.parse.ArmSourceTokenizer;
 
 public class ArmTest {
@@ -38,9 +37,7 @@ public class ArmTest {
 		
 		InputStream is = ArmTest.class.getResourceAsStream("add.s");
 		ArmProgram program = new ArmSourceCompiler().compile(is, new CompilerInfoCollector());
-		Map<String, Integer> registers = new HashMap<String, Integer>();
-		registers.put("R0", 1);
-		registers.put("R1", 2);
+		Registers registers = new Registers();
 		Memory memory = new Memory();
 		program.run(registers, memory);
 		//dump registers

@@ -22,7 +22,10 @@ public class ArmSourceCompiler {
 	 * @return the root node of the program (aka the first instruction) or {@code null} id compiler errors
 	 * @throws IOException
 	 */
-	public ArmProgram compile(InputStream source, CompilerInfoCollector collector ) {
+	public ArmProgram compile(InputStream source, InfoCollector collector ) {
+		if (collector == null) {
+			collector = new NullInfoCollector();
+		}
 		Instruction prev = null;
 		Instruction next = null;
 		ArmSourceScanner scanner = new ArmSourceScanner(source);
