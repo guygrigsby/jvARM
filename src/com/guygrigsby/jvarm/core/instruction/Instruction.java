@@ -8,6 +8,7 @@ import com.guygrigsby.jvarm.core.Registers;
 import com.guygrigsby.jvarm.core.parse.ArmSourceTokenizer;
 
 public abstract class Instruction {
+	
 	private int lineNumber;
 	private String label;
 	private Instruction next;

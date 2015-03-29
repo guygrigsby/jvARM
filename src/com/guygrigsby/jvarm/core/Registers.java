@@ -137,6 +137,11 @@ public class Registers implements Map<String, Integer> {
 	 * @see java.util.Map#entrySet()
 	 */
 	public Set<java.util.Map.Entry<String, Integer>> entrySet() {
+		Set<java.util.Map.Entry<String, Integer>> delegateSet = map.entrySet();
+		map.put("N", isNegative()?1:0);
+		map.put("Z", isZero()?1:0);
+		map.put("C", isCarry()?1:0);
+		map.put("V", isOverflow()?1:0);
 		return map.entrySet();
 	}
 	/**
@@ -211,5 +216,4 @@ public class Registers implements Map<String, Integer> {
 	public int hashCode() {
 		return map.hashCode();
 	}
-
 }

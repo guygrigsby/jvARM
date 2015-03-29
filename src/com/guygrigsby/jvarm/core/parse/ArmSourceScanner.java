@@ -70,7 +70,7 @@ public class ArmSourceScanner {
 			instruction = new EOR();
 			break;
 		case ArmSourceTokenizer.BRANCH:
-			instruction = new Branch();
+			instruction = new Branch(current.value.substring(1));
 			break;
 		case ArmSourceTokenizer.EOF:
 			return null;

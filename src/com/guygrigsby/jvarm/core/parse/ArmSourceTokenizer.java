@@ -38,12 +38,6 @@ public class ArmSourceTokenizer {
 
 
 	public static final int EOF = 0;
-
-
-
-
-
-	
 	
 	public Map<String, Integer> keywords; 
 
@@ -69,8 +63,10 @@ public class ArmSourceTokenizer {
 		keywords.put("AND", AND);
 		keywords.put("OR", OR);
 		keywords.put("EOR", EOR);
+		
 		keywords.put("B", BRANCH);
-		keywords.put("BL", BRANCH);
+		keywords.put("BEQ", BRANCH);
+		keywords.put("BNE", BRANCH);
 		
 		//TODO add others
 		return keywords;

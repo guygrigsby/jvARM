@@ -9,13 +9,24 @@ import com.guygrigsby.jvarm.core.parse.ArmSourceTokenizer;
 
 public class Branch extends Instruction {
 	
+	private String conditionalCode;
+	
 	private String branchLabel;
 	
 	private Instruction branch;
+	
+	public Branch(String condition) {
+		conditionalCode = condition;
+	}
 
 	@Override
 	public int execute(Registers registers, Map<String, Instruction> labels) {
-		branch = labels.get(branchLabel);
+		Instruction possibleBranch = labels.get(branchLabel);
+		if (conditionalCode.isEmpty()) {
+			branch = possibleBranch;
+		} else {
+			branch = new Conditional(conditionalCode).execute(registers, possibleBranch);
+		}
 		return 0;
 	}
 
