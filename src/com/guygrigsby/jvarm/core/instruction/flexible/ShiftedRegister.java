@@ -1,6 +1,8 @@
 package com.guygrigsby.jvarm.core.instruction.flexible;
 
 import java.io.IOException;
+import java.util.Map;
+
 import com.guygrigsby.jvarm.core.CompilerError;
 import com.guygrigsby.jvarm.core.Registers;
 import com.guygrigsby.jvarm.core.instruction.Constant;
@@ -19,9 +21,9 @@ public class ShiftedRegister extends RegisterContents {
 	}
 
 	@Override
-	public int execute(Registers registers) {
-		int valueToBeShifted = super.execute(registers);
-		int valueToShiftBy = shiftByInstruction.execute(registers);
+	public int execute(Registers registers, Map<String, Instruction> labels) {
+		int valueToBeShifted = super.execute(registers, labels);
+		int valueToShiftBy = shiftByInstruction.execute(registers, labels);
 		int shiftedValue = 0;
 		switch (shiftType) {
 		case "ASR":
@@ -44,8 +46,6 @@ public class ShiftedRegister extends RegisterContents {
 			shiftedValue = valueToBeShifted >> 1;
 			if (currentCarry) {
 				shiftedValue = shiftedValue | 0x80000000;
-			} else {
-				shiftedValue = shiftedValue & 0x00000001;
 			}
 			registers.setCarry(newCarry);
 			break;

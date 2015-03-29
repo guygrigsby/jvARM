@@ -1,13 +1,16 @@
 package com.guygrigsby.jvarm.core.instruction.arithmetic;
 
+import java.util.Map;
+
 import com.guygrigsby.jvarm.core.Registers;
+import com.guygrigsby.jvarm.core.instruction.Instruction;
 
 public class SUB extends ArithmeticInstruction {
 
 	@Override
-	public int execute(Registers registers) {
+	public int execute(Registers registers, Map<String, Instruction> labels) {
 		int first = registers.get(getFirstOperand());
-		int second = getFlexibleSecondOp().execute(registers);;
+		int second = getFlexibleSecondOp().execute(registers, labels);
 		int result;
 		try {
 			result = Math.subtractExact(first, second);

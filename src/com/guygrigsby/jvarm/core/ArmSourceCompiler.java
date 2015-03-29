@@ -2,6 +2,8 @@ package com.guygrigsby.jvarm.core;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,9 +30,13 @@ public class ArmSourceCompiler {
 		}
 		Instruction prev = null;
 		Instruction next = null;
+		Map<String, Instruction> labels = new HashMap<String, Instruction>();
 		ArmSourceScanner scanner = new ArmSourceScanner(source);
 		try {
 			next = scanner.nextInstruction();
+			if (next != null && next.getLabel() != null) {
+				labels.put(next.getLabel(), next);
+			}
 		} catch (CompilerError e) {
 			collector.addError(e);
 		}
@@ -39,6 +45,9 @@ public class ArmSourceCompiler {
 			prev = next;
 			try {
 				next = scanner.nextInstruction();
+				if (next != null && next.getLabel() != null) {
+					labels.put(next.getLabel(), next);
+				}
 			} catch (CompilerError e) {
 				next = null;
 				collector.addError(e);
@@ -47,6 +56,7 @@ public class ArmSourceCompiler {
 				prev.setNext(next);
 			}
 		} while (next != null);
+		program.setLabels(labels);
 		
 		return program;
 	}

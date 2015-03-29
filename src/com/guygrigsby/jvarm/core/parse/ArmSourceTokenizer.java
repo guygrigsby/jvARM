@@ -24,6 +24,8 @@ public class ArmSourceTokenizer {
 	public static final int AND						= 7;
 	public static final int OR						= 8;
 	public static final int EOR						= 9;
+	public static final int LABEL					= 10;
+	public static final int BRANCH					= 11;
 	
 	public static final int DEFAULT_TOKEN_NUMBER = 12;
 	
@@ -67,6 +69,8 @@ public class ArmSourceTokenizer {
 		keywords.put("AND", AND);
 		keywords.put("OR", OR);
 		keywords.put("EOR", EOR);
+		keywords.put("B", BRANCH);
+		keywords.put("BL", BRANCH);
 		
 		//TODO add others
 		return keywords;
@@ -102,7 +106,7 @@ public class ArmSourceTokenizer {
 			if ((word.length() ==2 || word.length() == 3) && word.startsWith("R")) { //TODO this is ugly
 				tokenType = REGISTER;
 			} else {
-				tokenType = keywords.get(word) == null ? DEFAULT_TOKEN_NUMBER : keywords.get(word);
+				tokenType = (keywords.get(word) == null) ? LABEL : keywords.get(word);
 			}
 			tokenValue = word;
 			break;

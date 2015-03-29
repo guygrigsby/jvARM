@@ -2,13 +2,13 @@ package com.guygrigsby.jvarm.core.parse;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.guygrigsby.jvarm.core.CompilerError;
+import com.guygrigsby.jvarm.core.instruction.Branch;
 import com.guygrigsby.jvarm.core.instruction.Instruction;
 import com.guygrigsby.jvarm.core.instruction.arithmetic.ADD;
 import com.guygrigsby.jvarm.core.instruction.arithmetic.RSB;
@@ -49,6 +49,7 @@ public class ArmSourceScanner {
 	 */
 	public Instruction nextInstruction() throws CompilerError {
 		Instruction instruction = null;
+		String labelName = null;
 		switch (current.type) {
 		case ArmSourceTokenizer.ADD:
 			instruction = new ADD();
@@ -68,8 +69,23 @@ public class ArmSourceScanner {
 		case ArmSourceTokenizer.EOR:
 			instruction = new EOR();
 			break;
+		case ArmSourceTokenizer.BRANCH:
+			instruction = new Branch();
+			break;
 		case ArmSourceTokenizer.EOF:
 			return null;
+		case ArmSourceTokenizer.LABEL:
+			labelName = current.value;
+			tokenizer.advanceToNextLine();
+			try {
+				current = tokenizer.nextToken();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			instruction = nextInstruction();
+			instruction.setLabel(labelName);
+			return instruction;
 		default:
 			int lineNo = tokenizer.getLineNumber();
 			String instructionName = current.value;
@@ -84,7 +100,9 @@ public class ArmSourceScanner {
 		}
 		if (instruction != null) {
 			try {
+				int lineNo = tokenizer.getLineNumber();
 				instruction.parse(tokenizer);
+				instruction.setLineNumber(lineNo);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
