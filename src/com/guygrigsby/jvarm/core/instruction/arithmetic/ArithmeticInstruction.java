@@ -1,8 +1,8 @@
 package com.guygrigsby.jvarm.core.instruction.arithmetic;
 
-import com.guygrigsby.jvarm.core.instruction.flexible.InstructionWithFlex;
+import com.guygrigsby.jvarm.core.instruction.flexible.InstructionWithFlexAndDestination;
 
-public abstract class ArithmeticInstruction extends InstructionWithFlex {
+public abstract class ArithmeticInstruction extends InstructionWithFlexAndDestination {
 
 	public ArithmeticInstruction() {
 		super();
