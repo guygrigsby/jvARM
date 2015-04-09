@@ -23,8 +23,10 @@ public class ArmProgram {
 	}
 	
 	public void step(Registers registers) {
-		current.execute(registers, labels);
-		current = current.getNext();
+		if (current != null) {
+			current.execute(registers, labels);
+			current = current.getNext();
+		}
 	}
 
 	public void setLabels(Map<String, Instruction> labelsIn) {
