@@ -30,7 +30,7 @@ public class CMP extends TwoOperatorInstructionWithFlexWithoutDestination {
 		int second = getFlexibleSecondOp().execute(registers, labels);
 		int result;
 		try {
-			result = Math.subtractExact(first, second);
+			result = Math.subtractExact(second, first);
 			registers.setOverflow(false);
 		} catch (ArithmeticException e) {
 			result = first - second;

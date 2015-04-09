@@ -26,6 +26,8 @@ public class ArmSourceTokenizer {
 	public static final int EOR						= 9;
 	public static final int LABEL					= 10;
 	public static final int BRANCH					= 11;
+	public static final int MOV						= 15;
+	public static final int CMP						= 16;
 	
 	public static final int DEFAULT_TOKEN_NUMBER = 12;
 	
@@ -63,10 +65,14 @@ public class ArmSourceTokenizer {
 		keywords.put("AND", AND);
 		keywords.put("OR", OR);
 		keywords.put("EOR", EOR);
+		keywords.put("MOV", MOV);
+		keywords.put("CMP", CMP);
 		
 		keywords.put("B", BRANCH);
 		keywords.put("BEQ", BRANCH);
 		keywords.put("BNE", BRANCH);
+		
+		
 		
 		//TODO add others
 		return keywords;

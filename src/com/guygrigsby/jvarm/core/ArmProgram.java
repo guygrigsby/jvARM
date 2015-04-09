@@ -40,6 +40,9 @@ public class ArmProgram {
 	}
 	
 	public int getLineUnderExecution() {
+		if (current == null) {
+			return -1;
+		}
 		return current.getLineNumber();
 	}
 

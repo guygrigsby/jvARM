@@ -2,14 +2,15 @@ package com.guygrigsby.jvarm.core.parse;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.guygrigsby.jvarm.core.CompilerError;
 import com.guygrigsby.jvarm.core.instruction.Branch;
+import com.guygrigsby.jvarm.core.instruction.CMP;
 import com.guygrigsby.jvarm.core.instruction.Instruction;
+import com.guygrigsby.jvarm.core.instruction.MOV;
 import com.guygrigsby.jvarm.core.instruction.arithmetic.ADD;
 import com.guygrigsby.jvarm.core.instruction.arithmetic.RSB;
 import com.guygrigsby.jvarm.core.instruction.arithmetic.SUB;
@@ -71,6 +72,12 @@ public class ArmSourceScanner {
 			break;
 		case ArmSourceTokenizer.BRANCH:
 			instruction = new Branch(current.value.substring(1));
+			break;
+		case ArmSourceTokenizer.CMP:
+			instruction = new CMP();
+			break;
+		case ArmSourceTokenizer.MOV:
+			instruction = new MOV();
 			break;
 		case ArmSourceTokenizer.EOF:
 			return null;

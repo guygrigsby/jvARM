@@ -137,7 +137,6 @@ public class Registers implements Map<String, Integer> {
 	 * @see java.util.Map#entrySet()
 	 */
 	public Set<java.util.Map.Entry<String, Integer>> entrySet() {
-		Set<java.util.Map.Entry<String, Integer>> delegateSet = map.entrySet();
 		map.put("N", isNegative()?1:0);
 		map.put("Z", isZero()?1:0);
 		map.put("C", isCarry()?1:0);
@@ -156,6 +155,7 @@ public class Registers implements Map<String, Integer> {
 	 */
 	public void setNegative(boolean negative) {
 		this.negative = negative;
+		map.put("N", isNegative()?1:0);
 	}
 
 	/**
@@ -170,6 +170,7 @@ public class Registers implements Map<String, Integer> {
 	 */
 	public void setZero(boolean zero) {
 		this.zero = zero;
+		map.put("Z", isZero()?1:0);
 	}
 
 	/**
@@ -184,6 +185,7 @@ public class Registers implements Map<String, Integer> {
 	 */
 	public void setCarry(boolean carry) {
 		this.carry = carry;
+		map.put("C", isCarry()?1:0);
 	}
 
 	/**
@@ -198,6 +200,7 @@ public class Registers implements Map<String, Integer> {
 	 */
 	public void setOverflow(boolean overflow) {
 		this.overflow = overflow;
+		map.put("V", isOverflow()?1:0);
 	}
 
 	/**
