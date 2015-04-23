@@ -25,4 +25,14 @@ public class Constant extends Instruction {
 		constant = number.intValue;
 	}
 
+	@Override
+	public String getInstructionName() {
+		return constant+"";
+	}
+	
+	@Override
+	public String toString() {
+		return constant+"";
+	}
+
 }

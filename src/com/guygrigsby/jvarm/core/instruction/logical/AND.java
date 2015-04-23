@@ -16,4 +16,9 @@ public class AND extends LogicalInstruction {
 		return result;
 	}
 
+	@Override
+	public String getInstructionName() {
+		return "AND";
+	}
+
 }

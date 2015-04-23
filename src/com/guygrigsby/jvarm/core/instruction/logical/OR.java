@@ -16,4 +16,9 @@ public class OR extends LogicalInstruction {
 		return result;
 	}
 
+	@Override
+	public String getInstructionName() {
+		return "OR";
+	}
+
 }

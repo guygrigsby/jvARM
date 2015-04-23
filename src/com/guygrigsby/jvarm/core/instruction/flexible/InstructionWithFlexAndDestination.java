@@ -56,5 +56,10 @@ public abstract class InstructionWithFlexAndDestination extends Instruction {
 	public Instruction getFlexibleSecondOp() {
 		return flexibleSecondOp;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s %s, %s, %s", this.getInstructionName(), getDestRegister(), getFirstOperand(), getFlexibleSecondOp());
+	}
 
 }

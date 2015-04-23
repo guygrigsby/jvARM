@@ -29,6 +29,7 @@ public abstract class Instruction {
 	
 	public abstract void parse(ArmSourceTokenizer tokenizer) throws IOException, CompilerError;
 	
+	public abstract String getInstructionName();
 
 	protected boolean validRegister(String reg) {
 		try {

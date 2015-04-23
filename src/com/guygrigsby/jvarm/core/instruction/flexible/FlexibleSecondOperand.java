@@ -35,7 +35,7 @@ public class FlexibleSecondOperand extends Instruction {
 			} else {
 				instruction = new RegisterContents(tokenVal);
 			}
-			
+			token = next;
 			break;
 		case ArmSourceTokenizer.CONSTANT_MARKER:
 			int intValue = token.intValue;
@@ -56,6 +56,15 @@ public class FlexibleSecondOperand extends Instruction {
 			token = tokenizer.nextToken();
 		}
 		
+	}
+	@Override
+	public String toString() {
+		return instruction.toString();
+	}
+
+	@Override
+	public String getInstructionName() {
+		return "";
 	}
 
 }

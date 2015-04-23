@@ -22,4 +22,9 @@ public class SUB extends ArithmeticInstruction {
 		registers.put(getDestRegister(), result);
 		return result;
 	}
+
+	@Override
+	public String getInstructionName() {
+		return "SUB";
+	}
 }

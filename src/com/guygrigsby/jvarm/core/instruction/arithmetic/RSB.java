@@ -23,4 +23,9 @@ public class RSB extends ArithmeticInstruction {
 		return result;
 	}
 
+	@Override
+	public String getInstructionName() {
+		return "RSB";
+	}
+
 }

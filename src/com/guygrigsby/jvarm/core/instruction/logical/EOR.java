@@ -16,4 +16,9 @@ public class EOR extends LogicalInstruction {
 		return result;
 	}
 
+	@Override
+	public String getInstructionName() {
+		return "EOR";
+	}
+
 }

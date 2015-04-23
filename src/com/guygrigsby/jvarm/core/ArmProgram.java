@@ -48,4 +48,8 @@ public class ArmProgram {
 		return current.getLineNumber();
 	}
 
+	public Instruction getInstructionUnderExecution() {
+		return current;
+	}
+
 }

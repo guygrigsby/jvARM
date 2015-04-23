@@ -32,7 +32,7 @@ public class Registers implements Map<String, Integer> {
 		map.put("R9", 0);
 		map.put("R10", 0);
 		map.put("R11", 0);
-		map.put("R10", 0);
+		map.put("R12", 0);
 		map.put("R13", 0);
 		map.put("R14", 0);
 		map.put("R15", 0);

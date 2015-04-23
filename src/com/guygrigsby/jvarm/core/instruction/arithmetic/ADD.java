@@ -23,6 +23,9 @@ public class ADD extends ArithmeticInstruction {
 		return result;
 	}
 
-
+	@Override
+	public String getInstructionName() {
+		return "ADD";
+	}
 
 }

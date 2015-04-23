@@ -38,4 +38,14 @@ public class RegisterContents extends Instruction {
 		return register;
 	}
 
+	@Override
+	public String getInstructionName() {
+		return getRegisterName();
+	}
+	
+	@Override
+	public String toString() {
+		return getRegisterName();
+	}
+
 }

@@ -90,7 +90,7 @@ public class ArmSourceTokenizer {
 			if (num == 0) { //hex TODO this should be done by finding a #
 				next = delegate.nextToken();
 				String possibleHex = delegate.sval;
-				if (possibleHex.startsWith("x")) {
+				if (possibleHex != null && possibleHex.startsWith("x")) {
 					tokenValue = possibleHex.substring(1);
 					tokenType = 13;
 				} else {

@@ -59,4 +59,9 @@ public class Branch extends Instruction {
 		return true;
 	}
 
+	@Override
+	public String getInstructionName() {
+		return "Branch";
+	}
+
 }

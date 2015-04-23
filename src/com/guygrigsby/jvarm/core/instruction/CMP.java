@@ -51,4 +51,14 @@ public class CMP extends TwoOperatorInstructionWithFlexWithoutDestination {
 		 */
 		return result;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s %s, %s", "CMP", getFirstOperand(), getFlexibleSecondOp());
+	}
+
+	@Override
+	public String getInstructionName() {
+		return "CMP";
+	}
 }

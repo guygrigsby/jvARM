@@ -17,5 +17,15 @@ public class MOV extends TwoOperatorInstructionWithFlexAndDestination {
 		registers.put(getDestRegister(), toMove);
 		return toMove;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s %s, %s", "MOV", getDestRegister(), getFlexibleSecondOp());
+	}
+
+	@Override
+	public String getInstructionName() {
+		return "MOV";
+	}
 
 }
